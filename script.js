@@ -1,8 +1,3 @@
-/* ============================================================
-   НИКАХ · Фаргат & Гулина — логика и анимации
-   ------------------------------------------------------------
-   ✏️  ЧТО ПОМЕНЯТЬ ПОД СЕБЯ — только этот блок:
-   ============================================================ */
 const CONFIG = {
   groom: "Фаргат",
   bride: "Гулина",
@@ -11,14 +6,13 @@ const CONFIG = {
   // Подпись в финале:
   signature: "С любовью от Нурислама и Алины",
 };
-/* ============================================================ */
 
 (function () {
   "use strict";
 
   const isTouch = window.matchMedia("(hover: none)").matches;
 
-  /* ---------- Подстановка имён, даты, подписи ---------- */
+
   const target = new Date(CONFIG.dateISO);
   document.getElementById("groomName").textContent = CONFIG.groom;
   document.getElementById("brideName").textContent = CONFIG.bride;
@@ -29,7 +23,7 @@ const CONFIG = {
   const signEl = document.querySelector(".finale-sign");
   if (signEl && CONFIG.signature) signEl.textContent = CONFIG.signature;
 
-  /* ---------- Прелоадер ---------- */
+
   const preloader = document.getElementById("preloader");
   const hidePreloader = () => {
     setTimeout(() => {
@@ -41,7 +35,7 @@ const CONFIG = {
   else window.addEventListener("load", hidePreloader);
   setTimeout(hidePreloader, 5000); // страховка
 
-  /* ---------- Звёздное небо на главном экране ---------- */
+
   const starsBg = document.querySelector(".stars-bg");
   if (starsBg) {
     const frag = document.createDocumentFragment();
@@ -57,7 +51,7 @@ const CONFIG = {
     starsBg.appendChild(frag);
   }
 
-  /* ---------- Появление блоков при прокрутке (с каскадом) ---------- */
+
   const revealEls = [...document.querySelectorAll(".reveal")];
   const observer = new IntersectionObserver(
     (entries) => {
@@ -80,7 +74,7 @@ const CONFIG = {
     });
   }
 
-  /* ---------- Параллакс плавающих орнаментов ---------- */
+
   const floats = [...document.querySelectorAll(".float")];
   let ticking = false;
   window.addEventListener("scroll", () => {
@@ -96,7 +90,7 @@ const CONFIG = {
     });
   }, { passive: true });
 
-  /* ---------- Точечная навигация + активный раздел ---------- */
+  
   const dots = [...document.querySelectorAll("#dots button")];
   const sections = dots.map((b) => document.getElementById(b.dataset.target));
 
@@ -112,7 +106,7 @@ const CONFIG = {
   );
   sections.forEach((s) => s && sectionObserver.observe(s));
 
-  /* ---------- Переход «золотая шторка» ---------- */
+
   const curtain = document.getElementById("curtain");
   const curtainWord = curtain.querySelector(".curtain-word");
   let transitioning = false;
@@ -166,7 +160,7 @@ const CONFIG = {
   const timer = setInterval(tick, 1000);
   tick();
 
-  /* ---------- 3D-наклон карточек пожеланий ---------- */
+
   if (!isTouch) {
     document.querySelectorAll(".tilt").forEach((card) => {
       card.addEventListener("mousemove", (e) => {
@@ -185,7 +179,7 @@ const CONFIG = {
     });
   }
 
-  /* ---------- Золотые искры за курсором ---------- */
+
   if (!isTouch) {
     const canvas = document.getElementById("sparkles");
     const ctx = canvas.getContext("2d");
