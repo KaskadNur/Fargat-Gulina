@@ -10,10 +10,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500&family=Marck+Script&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
+<style>
+  .countdown-label {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: #d4af37;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 2.4rem;      /* ← отступ от даты — больше */
+    margin-bottom: 0.5rem;   /* ← отступ до таймера — меньше */
+    opacity: 0.9;
+  }
+</style>
 </head>
 <body>
 
-
+<!-- ===== Прелоадер: рисующийся полумесяц ===== -->
 <div id="preloader" aria-hidden="true">
   <svg class="pre-moon" viewBox="0 0 100 100">
     <path class="moon-path" d="M 63 15 A 38 38 0 1 0 63 85 A 30 30 0 1 1 63 15 Z" />
@@ -22,7 +35,7 @@
   <p class="pre-text">Фаргат&nbsp;&amp;&nbsp;Гулина</p>
 </div>
 
-
+<!-- ===== Золотая шторка для переходов между разделами ===== -->
 <div id="curtain" aria-hidden="true">
   <span class="curtain-word"></span>
   <svg class="curtain-orn" viewBox="0 0 100 100">
@@ -31,7 +44,7 @@
   </svg>
 </div>
 
-
+<!-- ===== Точечная навигация ===== -->
 <nav id="dots" aria-label="Навигация по сайту">
   <button data-target="hero"><span>Начало</span></button>
   <button data-target="dua"><span>Благословение</span></button>
@@ -45,7 +58,7 @@
 
 <main>
 
-
+  <!-- ================= ЭКРАН 1 · НАЧАЛО ================= -->
   <section id="hero" class="panel">
     <div class="stars-bg" aria-hidden="true"></div>
 
@@ -73,6 +86,8 @@
       </div>
       <p class="hero-date reveal" id="heroDate"></p>
 
+      <p class="countdown-label reveal" id="cdLabel">Осталось до никаха</p>
+
       <div class="countdown reveal" id="countdown">
         <div><b id="cd-d">0</b><i>дней</i></div>
         <span class="cd-sep">·</span>
@@ -88,7 +103,7 @@
     </div>
   </section>
 
-
+  <!-- ================= ЭКРАН 2 · БЛАГОСЛОВЕНИЕ ================= -->
   <section id="dua" class="panel">
     <div class="panel-inner">
       <svg class="divider reveal" viewBox="0 0 400 40" aria-hidden="true">
@@ -114,7 +129,7 @@
     </div>
   </section>
 
-
+  <!-- ================= ЭКРАН 3 · ИСТОРИЯ ================= -->
   <section id="story" class="panel">
     <div class="panel-inner wide">
       <h2 class="sec-title reveal">Их история</h2>
@@ -154,7 +169,7 @@
     </div>
   </section>
 
-
+  <!-- ================= ЭКРАН 4 · ПОЖЕЛАНИЯ ================= -->
   <section id="wishes" class="panel">
     <div class="panel-inner wide">
       <h2 class="sec-title reveal">Пожелания молодой семье</h2>
