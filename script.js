@@ -1,10 +1,11 @@
+
 const CONFIG = {
   groom: "Фаргат",
   bride: "Гулина",
   // Дата и время никаха (год-месяц-день T часы:минуты:секунды):
-  dateISO: "2026-08-19T12:00:00",
+  dateISO: "2026-08-21T10:30:00",
   // Подпись в финале:
-  signature: "С любовью от Нурислама и Алины",
+  signature: "С любовью и дуа за вас — твой брат",
 };
 
 (function () {
@@ -74,7 +75,7 @@ const CONFIG = {
     });
   }
 
-
+ 
   const floats = [...document.querySelectorAll(".float")];
   let ticking = false;
   window.addEventListener("scroll", () => {
@@ -90,7 +91,7 @@ const CONFIG = {
     });
   }, { passive: true });
 
-  
+
   const dots = [...document.querySelectorAll("#dots button")];
   const sections = dots.map((b) => document.getElementById(b.dataset.target));
 
@@ -133,30 +134,44 @@ const CONFIG = {
   );
   document.getElementById("toTop").addEventListener("click", () => goToSection("hero", "Начало"));
 
-  /* ---------- Обратный отсчёт до никаха ---------- */
   const cd = {
+    l: document.getElementById("cdLabel"),   // подпись
     d: document.getElementById("cd-d"),
     h: document.getElementById("cd-h"),
     m: document.getElementById("cd-m"),
     s: document.getElementById("cd-s"),
   };
   const cdBox = document.getElementById("countdown");
-  const cdDone = document.getElementById("cdDone");
 
   function tick() {
-    const diff = target - new Date();
+    const now = new Date();
+    const diff = target - now; // отрицательное = никах уже прошёл
+
+    let days, hours, minutes, seconds;
+
     if (diff <= 0) {
-      cdBox.hidden = true;
-      cdDone.hidden = false;
-      cdDone.classList.add("in");
-      clearInterval(timer);
-      return;
+      // ── Никах уже состоялся ──
+      cd.l.textContent = "Прошло с никаха";
+      const passed = Math.abs(diff);
+      days    = Math.floor(passed / 864e5);
+      hours   = Math.floor(passed / 36e5) % 24;
+      minutes = Math.floor(passed / 6e4) % 60;
+      seconds = Math.floor(passed / 1e3) % 60;
+    } else {
+      // ── Никах ещё впереди ──
+      cd.l.textContent = "Осталось до никаха";
+      days    = Math.floor(diff / 864e5);
+      hours   = Math.floor(diff / 36e5) % 24;
+      minutes = Math.floor(diff / 6e4) % 60;
+      seconds = Math.floor(diff / 1e3) % 60;
     }
-    cd.d.textContent = Math.floor(diff / 864e5);
-    cd.h.textContent = String(Math.floor(diff / 36e5) % 24).padStart(2, "0");
-    cd.m.textContent = String(Math.floor(diff / 6e4) % 60).padStart(2, "0");
-    cd.s.textContent = String(Math.floor(diff / 1e3) % 60).padStart(2, "0");
+
+    cd.d.textContent = days;
+    cd.h.textContent = String(hours).padStart(2, "0");
+    cd.m.textContent = String(minutes).padStart(2, "0");
+    cd.s.textContent = String(seconds).padStart(2, "0");
   }
+
   const timer = setInterval(tick, 1000);
   tick();
 
