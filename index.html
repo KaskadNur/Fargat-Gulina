@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Фаргат &amp; Гулина — Никах</title>
+<meta name="description" content="Поздравление со священным обрядом Никах: Фаргат и Гулина" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M63 15A38 38 0 1 0 63 85 30 30 0 1 1 63 15Z' fill='%23d4af37'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500&family=Marck+Script&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== Прелоадер: рисующийся полумесяц ===== -->
+<div id="preloader" aria-hidden="true">
+  <svg class="pre-moon" viewBox="0 0 100 100">
+    <path class="moon-path" d="M 63 15 A 38 38 0 1 0 63 85 A 30 30 0 1 1 63 15 Z" />
+    <path class="star-path" d="M 70 38 L 72.4 44.1 L 78.5 46.5 L 72.4 48.9 L 70 55 L 67.6 48.9 L 61.5 46.5 L 67.6 44.1 Z" />
+  </svg>
+  <p class="pre-text">Фаргат&nbsp;&amp;&nbsp;Гулина</p>
+</div>
+
+<!-- ===== Золотая шторка для переходов между разделами ===== -->
+<div id="curtain" aria-hidden="true">
+  <span class="curtain-word"></span>
+  <svg class="curtain-orn" viewBox="0 0 100 100">
+    <rect x="26" y="26" width="48" height="48" />
+    <rect x="26" y="26" width="48" height="48" transform="rotate(45 50 50)" />
+  </svg>
+</div>
+
+<!-- ===== Точечная навигация ===== -->
+<nav id="dots" aria-label="Навигация по сайту">
+  <button data-target="hero"><span>Начало</span></button>
+  <button data-target="dua"><span>Благословение</span></button>
+  <button data-target="story"><span>История</span></button>
+  <button data-target="wishes"><span>Пожелания</span></button>
+  <button data-target="finale"><span>Финал</span></button>
+</nav>
+
+<!-- Холст для золотых искр за курсором -->
+<canvas id="sparkles" aria-hidden="true"></canvas>
+
+<main>
+
+  <!-- ================= ЭКРАН 1 · НАЧАЛО ================= -->
+  <section id="hero" class="panel">
+    <div class="stars-bg" aria-hidden="true"></div>
+
+    <div class="float f1" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><rect x="26" y="26" width="48" height="48"/><rect x="26" y="26" width="48" height="48" transform="rotate(45 50 50)"/></svg>
+    </div>
+    <div class="float f2" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M63 15A38 38 0 1 0 63 85 30 30 0 1 1 63 15Z"/></svg>
+    </div>
+    <div class="float f3" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><rect x="26" y="26" width="48" height="48"/><rect x="26" y="26" width="48" height="48" transform="rotate(45 50 50)"/></svg>
+    </div>
+    <div class="float f4" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path d="M50 20 L56 44 L80 50 L56 56 L50 80 L44 56 L20 50 L44 44 Z"/></svg>
+    </div>
+
+    <div class="hero-inner">
+      <p class="bismillah reveal">Бисмилляхир-рахманир-рахим</p>
+      <p class="hero-sub reveal">священный обряд</p>
+      <h1 class="hero-title reveal">НИКАХ</h1>
+      <div class="hero-names reveal">
+        <span class="name" id="groomName">Фаргат</span>
+        <span class="amp">&amp;</span>
+        <span class="name" id="brideName">Гулина</span>
+      </div>
+      <p class="hero-date reveal" id="heroDate"></p>
+
+      <div class="countdown reveal" id="countdown">
+        <div><b id="cd-d">0</b><i>дней</i></div>
+        <span class="cd-sep">·</span>
+        <div><b id="cd-h">0</b><i>часов</i></div>
+        <span class="cd-sep">·</span>
+        <div><b id="cd-m">0</b><i>минут</i></div>
+        <span class="cd-sep">·</span>
+        <div><b id="cd-s">0</b><i>секунд</i></div>
+      </div>
+      <p class="cd-done reveal" id="cdDone" hidden>Этот благословенный день наступил — альхамдулиллях!</p>
+
+      <div class="scroll-hint reveal"><span></span>листайте вниз</div>
+    </div>
+  </section>
+
+  <!-- ================= ЭКРАН 2 · БЛАГОСЛОВЕНИЕ ================= -->
+  <section id="dua" class="panel">
+    <div class="panel-inner">
+      <svg class="divider reveal" viewBox="0 0 400 40" aria-hidden="true">
+        <line x1="0" y1="20" x2="160" y2="20" class="d-line"/>
+        <rect x="186" y="6" width="28" height="28" class="d-sq"/>
+        <rect x="186" y="6" width="28" height="28" transform="rotate(45 200 20)" class="d-sq"/>
+        <line x1="240" y1="20" x2="400" y2="20" class="d-line"/>
+      </svg>
+
+      <h2 class="sec-title reveal">Благословение молодым</h2>
+
+      <blockquote class="reveal">
+        <p class="dua-ar">«Барака-Ллаху лякума, ва барака галейкума,<br/>ва джамаа байнакума фи хайр»</p>
+        <p class="dua-ru">«Да благословит Аллах вас обоих, да ниспошлёт Он вам<br/>Свои благословения и да объединит вас в добре»</p>
+      </blockquote>
+
+      <p class="dua-note reveal">
+        Никах — это не просто торжество. Это обет перед Всевышним,
+        половина веры и начало пути, который двое проходят рука об руку.
+        Пусть каждый ваш день будет наполнен милостью, терпением
+        и искренней любовью ради Аллаха.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ЭКРАН 3 · ИСТОРИЯ ================= -->
+  <section id="story" class="panel">
+    <div class="panel-inner wide">
+      <h2 class="sec-title reveal">Их история</h2>
+      <p class="sec-lead reveal">Всё, что предопределено, свершается в срок</p>
+
+      <div class="timeline">
+        <div class="t-line" aria-hidden="true"></div>
+
+        <div class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <h3>Знакомство</h3>
+          <p>Однажды, по воле Всевышнего, пути Фаргата и Гулины пересеклись —
+             и мир вокруг стал чуть светлее. Так незаметно начинается самое главное.</p>
+        </div>
+
+        <div class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <h3>Ближе день ото дня</h3>
+          <p>Долгие разговоры, искренние улыбки и понимание без лишних слов —
+             именно так рождается настоящее чувство.</p>
+        </div>
+
+        <div class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <h3>Заветное «да»</h3>
+          <p>Фаргат сделал самый важный шаг в своей жизни —
+             и услышал в ответ заветное «да».</p>
+        </div>
+
+        <div class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <h3>Никах</h3>
+          <p>Сегодня два сердца соединяются перед Аллахом.
+             Альхамдулиллях — хвала Всевышнему за этот день!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЭКРАН 4 · ПОЖЕЛАНИЯ ================= -->
+  <section id="wishes" class="panel">
+    <div class="panel-inner wide">
+      <h2 class="sec-title reveal">Пожелания молодой семье</h2>
+      <p class="sec-lead reveal">наведите на карточку — она оживёт</p>
+
+      <div class="cards">
+        <article class="card tilt reveal">
+          <h3>Баракат в доме</h3>
+          <p>Пусть в вашем доме всегда живут достаток, тепло
+             и благословение Всевышнего.</p>
+        </article>
+        <article class="card tilt reveal">
+          <h3>Любовь и терпение</h3>
+          <p>Любите друг друга ради Аллаха, прощайте, поддерживайте
+             и берегите — в радости и в трудные дни.</p>
+        </article>
+        <article class="card tilt reveal">
+          <h3>Крепкая вера</h3>
+          <p>Пусть иман укрепляет ваш союз, а общие молитвы
+             станут источником силы и покоя.</p>
+        </article>
+        <article class="card tilt reveal">
+          <h3>Здоровые дети</h3>
+          <p>Пусть Аллах подарит вам праведных, здоровых
+             и счастливых детей — радость вашей жизни.</p>
+        </article>
+        <article class="card tilt reveal">
+          <h3>Мир и согласие</h3>
+          <p>Пусть между вами всегда будут уважение, нежность
+             и тот самый уют, ради которого хочется возвращаться домой.</p>
+        </article>
+        <article class="card tilt reveal">
+          <h3>До Джанната</h3>
+          <p>Пусть союз, начатый на этом свете,
+             по милости Всевышнего продолжится в Раю.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЭКРАН 5 · ФИНАЛ ================= -->
+  <section id="finale" class="panel">
+    <div class="finale-glow" aria-hidden="true"></div>
+    <div class="panel-inner">
+      <p class="finale-script reveal">Совет да любовь!</p>
+      <p class="finale-text reveal">
+        Дорогие Фаргат и Гулина! Сегодня начинается ваша общая история —
+        история семьи, веры и любви. Пусть Аллах сделает её долгой,
+        светлой и счастливой, а ваш дом — полной чашей.
+      </p>
+      <p class="finale-sign reveal">С любовью и дуа за вас — твой брат</p>
+      <button id="toTop" class="gold-btn reveal" type="button">Вернуться к началу</button>
+    </div>
+    <footer class="foot">Сделано с любовью · Фаргат &amp; Гулина</footer>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
